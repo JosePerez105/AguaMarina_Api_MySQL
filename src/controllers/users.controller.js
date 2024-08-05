@@ -68,7 +68,7 @@ export const patchUserStatus = async(req,res) => {
     try {
         const [users] = await pool.query("SELECT * FROM Users WHERE id_user = ?", [id])
         const newStatus = users[0].status == 1 ?  0 : 1;
-        await pool.query("UPDATE users SET status = ? WHERE id_user = ?", [newStatus, id])
+        await pool.query("UPDATE Users SET status = ? WHERE id_user = ?", [newStatus, id])
         const [user] = await pool.query("SELECT * FROM Users WHERE id_user = ?", [id])
         res.json(user)
     } catch (error) {
