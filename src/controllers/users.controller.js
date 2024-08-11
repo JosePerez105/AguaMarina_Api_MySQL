@@ -1,8 +1,8 @@
 import {pool} from '../db.js'
 
-export const getUsers = async(req,res) => {
+export const getUsers = async(req, res) => {
     try {
-        const [users] = await pool.query('SELECT * from Users')
+        const [users] = await pool.query('SELECT * FROM Users')
         res.json(users)
     } catch (error) {
         return res.status(500).json({
@@ -26,27 +26,35 @@ export const getUser = async(req, res) => {
     }
 }
 
-export const postUsers = async(req,res) => {
-    const {names, lastnames, dni, mail, password, phone_number,} = req.body
-    try {
-        const [user] = await pool.query('INSERT INTO Users (names, lastnames, dni, mail, password, phone_number) VALUES (?, ?, ?, ?, ?, ?)', [names, lastnames, dni, mail, password, phone_number])
-        res.send({
-            id: user.insertId,
-            names,
-            lastnames,
-            dni,
-            mail,
-            password,
-            phone_number
-        })
-    } catch (error) {
-        return res.status(500).json({
-            message : "Algo ha ido mal al registrar el usuario"
-        })
+export const postUsers = async(req, res) => {
+    const {names, lastnames, dni, mail, password, phone_number, id_rol = 2, status = true} = req.body
+    const [existente] = await pool.query('SELECT * FROM Users WHERE dni = ? OR mail = ? ', [dni, mail])
+    if (existente.length > 0) {
+        res.status(500).json({message : "Usuario con Email o DNI ya existente"})
+    } else {
+        try {
+            const [user] = await pool.query('INSERT INTO Users (names, lastnames, dni, mail, password, phone_number, id_rol, status) VALUES (?, ?, ?, ?, ?, ?, ?, ?)', [names, lastnames, dni, mail, password, phone_number, id_rol, status])
+            res.send({
+                id: user.insertId,
+                names,
+                lastnames,
+                dni,
+                mail,
+                password,
+                phone_number,
+                id_rol,
+                status
+            })
+        } catch (error) {
+            return res.status(500).json({
+                message : "Algo ha ido mal al registrar el usuario"
+            })
+        }
     }
+    
 }
 
-export const putUsers = async(req,res) => {
+export const putUsers = async(req, res) => {
     const {id} = req.params
     const {names, lastnames, dni, mail, password, phone_number} = req.body
     try {
@@ -63,7 +71,7 @@ export const putUsers = async(req,res) => {
     }
 }
 
-export const patchUserStatus = async(req,res) => {
+export const patchUserStatus = async(req, res) => {
     const {id} = req.params
     try {
         const [users] = await pool.query("SELECT * FROM Users WHERE id_user = ?", [id])
@@ -78,7 +86,7 @@ export const patchUserStatus = async(req,res) => {
     }
 }
 
-export const deleteUsers = async(req,res) => {
+export const deleteUsers = async(req, res) => {
     const {id} = req.params
     try {
         const [user] = await pool.query("DELETE FROM Users WHERE id_user = ?", [id])

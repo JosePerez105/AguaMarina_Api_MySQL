@@ -8,3 +8,4 @@ export const DB_PASSWORD = process.env.DB_PASSWORD || ''
 export const DB_HOST = process.env.DB_HOST || 'localhost'
 export const DB_DATABASE = process.env.DB_DATABASE || 'aguamarina_db'
 export const DB_PORT = process.env.DB_PORT || 3306
+export const SECRET_JWT = process.env.SECRET_JWT || 'secret_jwt'
