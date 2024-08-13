@@ -85,19 +85,3 @@ export const patchUserStatus = async(req, res) => {
         })
     }
 }
-
-export const deleteUsers = async(req, res) => {
-    const {id} = req.params
-    try {
-        const [user] = await pool.query("DELETE FROM Users WHERE id_user = ?", [id])
-        if (user.affectedRows <= 0) return res.status(404).json({
-            message: "No se ha eliminado ningún usuario"
-        })
-        res.send(`Usuario # ${id} eliminado`)
-        console.log(user)
-    } catch (error) {
-        return res.status(500).json({
-            message : "Algo ha ido mal al eliminar el usuario"
-        })
-    }
-}

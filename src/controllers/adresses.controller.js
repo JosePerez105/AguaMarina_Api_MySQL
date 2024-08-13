@@ -11,7 +11,7 @@ export const getAllAdresses = async(req, res) => {
     }
 }
 
-export const getAdresses = async(req, res) => {
+export const getAdressesUser = async(req, res) => {
     const {id_user} = req.params
     try {
         const [adresses] = await pool.query('SELECT * FROM Adresses WHERE id_user = ?', [id_user])

@@ -10,7 +10,17 @@ const options = {
             description: 'API for AguaMarina',
             contact: {
                 name: 'AguaMarina'
-            }
+            },
+            servers: [
+                {
+                    url: 'http://localhost:3000',
+                    description: 'Local server'
+                }
+            ]
         }
-    }
-}
+    },
+    apis: ['../src/routes/*.js']
+};
+
+const specs = swaggerJSDoc(options)
+export default specs;

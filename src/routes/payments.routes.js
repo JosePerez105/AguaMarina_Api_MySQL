@@ -3,6 +3,7 @@ import { getPayments, getPayment, postPayments, putPayment, deletePayments } fro
 
 const router = Router();
 
+//Rutas de los registros de pago
 router.get('/payments', getPayments)
 router.get('/payments/:id_payment', getPayment)
 router.post('/payments', postPayments)

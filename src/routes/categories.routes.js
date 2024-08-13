@@ -3,6 +3,7 @@ import { getCategories, getCategory, postCategories, putCategories } from "../co
 
 const router = Router();
 
+//Rutas de las categorias
 router.get('/categories', getCategories)
 router.get('/categories/:id', getCategory)
 router.post('/categories', postCategories)

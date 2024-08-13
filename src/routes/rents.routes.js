@@ -3,6 +3,7 @@ import { getAllRents, getRent, getRentsUser, getRentsSeller, postRents, patchRen
 
 const router = Router();
 
+//Rutas de los alquileres
 router.get('/rents', getAllRents)
 router.get('/rents/:id_rent', getRent)
 router.get('/rentsuser/:id_user', getRentsUser)

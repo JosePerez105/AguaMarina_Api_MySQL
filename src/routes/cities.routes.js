@@ -3,6 +3,7 @@ import { getCities, getCity, postCities, putCity, deleteCities } from "../contro
 
 const router = Router();
 
+//Rutas de las ciudades
 router.get('/cities', getCities)
 router.get('/cities/:id_city', getCity)
 router.post('/cities', postCities)
