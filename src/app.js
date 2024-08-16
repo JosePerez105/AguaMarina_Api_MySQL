@@ -13,6 +13,7 @@ import rentRoutes from './routes/rents.routes.js'
 import paymentsRoutes from './routes/payments.routes.js'
 import checklistsRoutes from './routes/checklists.routes.js'
 import purchasesRoutes from './routes/purchases.routes.js'
+import codesRoutes from './routes/codes.routes.js'
 
 const app = express()
 app.use(cors())
@@ -32,6 +33,7 @@ app.use('/api', rentRoutes)
 app.use('/api', paymentsRoutes)
 app.use('/api', checklistsRoutes)
 app.use('/api', purchasesRoutes)
+app.use('/api', codesRoutes)
 
 app.use((req, res, next) => {
     res.status(404).json({

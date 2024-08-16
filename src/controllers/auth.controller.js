@@ -17,7 +17,7 @@ export const authLogin = async(req, res) => {
                 {message : "Autenticado",
                     token : accessToken
                 }
-            )
+            ).cookie('jwt', accessToken)
         } else {
             res.json({"message" : "Incorrecto"})
         }

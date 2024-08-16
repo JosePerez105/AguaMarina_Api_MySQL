@@ -11,7 +11,7 @@ export const getUsers = async(req, res) => {
     }
 };
 
-export const getUser = async(req, res) => {
+export const getUserById = async(req, res) => {
     const {id} = req.params
     try {
         const [users] = await pool.query("SELECT * FROM Users WHERE id_user = ?", [id])
@@ -22,6 +22,21 @@ export const getUser = async(req, res) => {
     } catch (error) {
         return res.status(500).json({
             message : "Algo ha ido mal al obtener el usuario"
+        })
+    }
+}
+
+export const getUserByMail = async(req, res) => {
+    const {mail} = req.body
+    try {
+        const [users] = await pool.query("SELECT * FROM Users WHERE mail = ?", [mail])
+        if (users.length <= 0) return res.status(404).json({
+            message : "No se ha encontrado ningún usuario con el correo proporcionado"
+        })
+        res.json(users)
+    } catch (error) {
+        return res.status(500).json({
+            message : "Algo ha ido mal al obtener el usuario con el correo proporcionado"
         })
     }
 }
