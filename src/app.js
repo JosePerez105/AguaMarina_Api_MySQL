@@ -16,7 +16,7 @@ import purchasesRoutes from './routes/purchases.routes.js'
 import codesRoutes from './routes/codes.routes.js'
 
 const app = express()
-app.use(cors())
+app.use(cors({credentials: true}))
 
 app.use(express.urlencoded({extended : false}))
 app.use(express.json())
