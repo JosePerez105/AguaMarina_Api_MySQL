@@ -13,7 +13,10 @@ export const authLogin = async(req, res) => {
 
         if (isMatch) {
             const accessToken = generateAccessToken(user)
-            res.cookie('jwt', accessToken)
+            res.cookie('jwt', accessToken, {
+                httpOnly: true,
+                maxAge: 24 * 60 * 60 * 1000
+            })
             res.header('authorization', accessToken).json(
                 {message : "Autenticado",
                     token : accessToken
