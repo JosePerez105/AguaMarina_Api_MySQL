@@ -17,7 +17,6 @@ import codesRoutes from './routes/codes.routes.js'
 
 const app = express()
 app.use(cors())
-app.use((cors({origin : '*'})))
 
 app.use(express.urlencoded({extended : false}))
 app.use(express.json())
