@@ -1,5 +1,6 @@
 import {pool} from '../db.js'
 import jwt from 'jsonwebtoken'
+import bcrypt from 'bcrypt'
 import '../config.js'
 
 export const authLogin = async(req, res) => {
@@ -8,16 +9,16 @@ export const authLogin = async(req, res) => {
     try {
         const [resQuery] = await pool.query('SELECT * FROM Users WHERE mail = ?', [mail])
         const user = resQuery[0]
-        console.log(user.password)
+        const isMatch =  await bcrypt.compare(password, user.password)
 
-        if (user.password == password) {
+        if (isMatch) {
             const accessToken = generateAccessToken(user)
-            console.log(accessToken)
+            res.cookie('jwt', accessToken)
             res.header('authorization', accessToken).json(
                 {message : "Autenticado",
                     token : accessToken
                 }
-            ).cookie('jwt', accessToken)
+            )
         } else {
             res.json({"message" : "Incorrecto"})
         }

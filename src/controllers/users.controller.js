@@ -1,4 +1,5 @@
 import {pool} from '../db.js'
+import bcrypt from 'bcrypt'
 
 export const getUsers = async(req, res) => {
     try {
@@ -44,12 +45,15 @@ export const getUserByMail = async(req, res) => {
 export const postUsers = async(req, res) => {
     const {names, lastnames, dni, mail, password, phone_number, id_rol = 2, status = true} = req.body
     const [existente] = await pool.query('SELECT * FROM Users WHERE dni = ? OR mail = ? ', [dni, mail])
+    const salt = await bcrypt.genSalt(10)
+
+    const pass_bcrypt = await bcrypt.hash(password, salt)
     if (existente.length > 0) {
         res.status(500).json({message : "Usuario con Email o DNI ya existente"})
     } else {
         try {
-            const [user] = await pool.query('INSERT INTO Users (names, lastnames, dni, mail, password, phone_number, id_rol, status) VALUES (?, ?, ?, ?, ?, ?, ?, ?)', [names, lastnames, dni, mail, password, phone_number, id_rol, status])
-            res.send({
+            const [user] = await pool.query('INSERT INTO Users (names, lastnames, dni, mail, password, phone_number, id_rol, status) VALUES (?, ?, ?, ?, ?, ?, ?, ?)', [names, lastnames, dni, mail, pass_bcrypt, phone_number, id_rol, status])
+            res.json({
                 id: user.insertId,
                 names,
                 lastnames,
