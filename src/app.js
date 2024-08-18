@@ -16,11 +16,22 @@ import purchasesRoutes from './routes/purchases.routes.js'
 import codesRoutes from './routes/codes.routes.js'
 
 const app = express()
-app.use(cors({
-    origin : 'http://localhost:3000', 
-    credentials : true, 
-    allowedHeaders : 'Content-Type, Authorization'
-}))
+
+const allowedOrigins = ['http://localhost:3000'];
+const corsOptions = {
+    origin: function (origin, callback) {
+        if (allowedOrigins.indexOf(origin) !== -1 || !origin) {
+            callback(null, origin);
+        } else {
+            callback(new Error('Not allowed by CORS'));
+        }
+    },
+    credentials: true,
+    methods: 'GET,HEAD,PUT,PATCH,POST,DELETE',
+    allowedHeaders: 'Content-Type, Authorization',
+};
+app.use(cors(corsOptions))
+app.options('*', cors(corsOptions));
 
 app.use(express.urlencoded({extended : false}))
 app.use(express.json())
