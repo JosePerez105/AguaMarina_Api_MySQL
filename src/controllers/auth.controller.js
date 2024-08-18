@@ -8,6 +8,11 @@ export const authLogin = async(req, res) => {
 
     try {
         const [resQuery] = await pool.query('SELECT * FROM Users WHERE mail = ?', [mail])
+        if (resQuery.length <= 0) {
+            res.status(404).json({
+                message : "No existe una cuenta con este correo",
+            })
+        }
         const user = resQuery[0]
         const isMatch =  await bcrypt.compare(password, user.password)
 
@@ -17,13 +22,15 @@ export const authLogin = async(req, res) => {
                 httpOnly: true,
                 maxAge: 24 * 60 * 60 * 1000
             })
-            res.header('authorization', accessToken).json(
-                {message : "Autenticado",
-                    token : accessToken
+            res.header('authorization', accessToken).json({
+                    message : "Inicio de Sesión Correcto",
+                    data : user
                 }
             )
         } else {
-            res.status(404).json({"message" : "Inicio de Sesión Inválido"})
+            res.status(404).json({
+                message : "Contraseña Incorrecta",
+            })
         }
 
     }catch {
