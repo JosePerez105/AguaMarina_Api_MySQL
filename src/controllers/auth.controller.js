@@ -9,7 +9,7 @@ export const authLogin = async(req, res) => {
     try {
         const [resQuery] = await pool.query('SELECT * FROM Users WHERE mail = ?', [mail])
         if (resQuery.length <= 0) {
-            res.status(404).json({
+            res.status(400).json({
                 message : "No existe una cuenta con este correo",
             })
         }
@@ -28,7 +28,7 @@ export const authLogin = async(req, res) => {
                 }
             )
         } else {
-            res.status(404).json({
+            res.status(400).json({
                 message : "Contraseña Incorrecta",
             })
         }
