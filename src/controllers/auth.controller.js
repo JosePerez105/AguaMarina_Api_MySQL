@@ -23,7 +23,7 @@ export const authLogin = async(req, res) => {
                 }
             )
         } else {
-            res.json({"message" : "Incorrecto"})
+            res.status(404).json({"message" : "Inicio de Sesión Inválido"})
         }
 
     }catch {
