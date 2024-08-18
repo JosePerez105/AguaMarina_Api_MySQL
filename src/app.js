@@ -1,5 +1,6 @@
 import express from 'express'
 import cors from 'cors'
+import cookieParser from 'cookie-parser'
 import swaggerUI from "swagger-ui-express"
 import specs from '../swagger/swagger.js'
 import usersRoutes from './routes/users.routes.js'
@@ -30,11 +31,13 @@ const corsOptions = {
     methods: 'GET,HEAD,PUT,PATCH,POST,DELETE',
     allowedHeaders: 'Content-Type, Authorization',
 };
+
 app.use(cors(corsOptions))
 app.options('*', cors(corsOptions));
 
 app.use(express.urlencoded({extended : false}))
 app.use(express.json())
+app.use(cookieParser());
 app.use('/api/docs', swaggerUI.serve, swaggerUI.setup(specs))
 
 app.use('/api', usersRoutes)
