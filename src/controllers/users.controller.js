@@ -1,3 +1,4 @@
+import { exists } from 'fs';
 import {pool} from '../db.js'
 import bcrypt from 'bcrypt'
 
@@ -32,12 +33,16 @@ export const getUserByMail = async(req, res) => {
     try {
         const [users] = await pool.query("SELECT * FROM Users WHERE mail = ?", [mail])
         if (users.length <= 0) return res.status(404).json({
-            message : "No se ha encontrado ningún usuario con el correo proporcionado"
+            message : "No se ha encontrado ningún usuario con el correo proporcionado",
+            exists : false
         })
-        res.json(users)
+        res.json({
+            users, 
+            exists : true
+        })
     } catch (error) {
         return res.status(500).json({
-            message : "Algo ha ido mal al obtener el usuario con el correo proporcionado"
+            message : "Algo ha ido mal al obtener el usuario con el correo proporcionado",
         })
     }
 }
