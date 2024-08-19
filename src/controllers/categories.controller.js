@@ -3,7 +3,7 @@ import {pool} from '../db.js'
 export const getCategories = async (req,res) => {
     try {
         const [categories] = await pool.query('SELECT * FROM Categories')
-        res.json(categories)
+        res.status(200).json(categories)
     } catch(error) {
         return res.status(500).json({
             message : "Algo ha ido mal al obtener las categorias"
