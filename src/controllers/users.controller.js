@@ -32,7 +32,7 @@ export const findUserByMail = async(req, res) => {
     const {mail} = req.body
     try {
         const [users] = await pool.query("SELECT * FROM Users WHERE mail = ?", [mail])
-        if (users.length <= 0) return res.status(404).json({
+        if (users.length <= 0)res.json({
             message : "No se ha encontrado ningún usuario con el correo proporcionado",
             exists : false
         })
