@@ -22,17 +22,17 @@ export const authLogin = async(req, res) => {
 
         if (isMatch) {
             const accessToken = generateAccessToken(user)
-            res.cookie('jwt', accessToken, {
+            await res.cookie('jwt', accessToken, {
                 httpOnly: true,
                 maxAge: 24 * 60 * 60 * 1000
             })
-            res.header('authorization', accessToken).json({
+            await res.header('authorization', accessToken).json({
                     message : "Inicio de Sesión Correcto",
                     data : user
                 }
             )
         } else {
-            res.status(400).json({
+            await res.status(400).json({
                 message : "Contraseña Incorrecta",
             })
         }
@@ -47,7 +47,7 @@ export const authLogin = async(req, res) => {
 }
 
 export function generateAccessToken(data) {
-    return jwt.sign(data, process.env.SECRET_JWT, {expiresIn : '30m'})
+    return  jwt.sign(data, process.env.SECRET_JWT, {expiresIn : '30m'})
 
 }
 
