@@ -272,10 +272,10 @@ export const validateVerificationCode = async (req, res) => {
         const storedCode = verification[0].code;
         const isMatch = await bcrypt.compare(codeStr, storedCode);
         if (!isMatch) {
-            return res.status(400).json({ message: 'Código de verificación incorrecto' });
+            return res.status(200).json({ message: 'Código de verificación incorrecto', isCorrect: false});
         }
 
-        return res.status(200).json({ message: 'Código de verificación correcto' });
+        return res.status(200).json({ message: 'Código de verificación correcto', isCorrect: true });
     } catch (error) {
         return res.status(500).json({ message: 'Error del servidor al validar el código' });
     }
