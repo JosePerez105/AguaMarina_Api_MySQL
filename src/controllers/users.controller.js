@@ -104,3 +104,18 @@ export const patchUserStatus = async(req, res) => {
         })
     }
 }
+
+//Funciones
+
+export const getUserByIdFunc = async (id) => {
+    try {
+        const [users] = await pool.query("SELECT * FROM Users WHERE id_user = ?", [id]);
+        if (users.length <= 0) {
+          return null;
+        }
+        return users[0];
+      } catch (error) {
+        console.error("Error al obtener el usuario:", error);
+        throw new Error("Error del servidor");
+      }
+}

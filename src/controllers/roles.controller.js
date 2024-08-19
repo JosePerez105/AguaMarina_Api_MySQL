@@ -86,7 +86,7 @@ export const getPermission = async(req, res) => {
 
 }
 
-export const getPermissionsRol = async(req, res) => {
+export const getRolePermissions = async(req, res) => {
     const {id_rol} = req.params
 
     try {
@@ -138,5 +138,20 @@ export const putPermissions = async(req, res) => {
         return res.status(500).json({
             message : "Error al actualizar los Permisos"
         })
+    }
+}
+
+//Funciones
+
+export const getRolePermissionsFunc = async (id_rol) => {
+    try {
+        const [permissions] = await pool.query('SELECT p.name FROM Permissions p INNER JOIN RolePermissions rp ON p.id_permission = rp.id_permission WHERE rp.id_rol = ?', [id_rol])
+        if (permissions.length <= 0) {
+            return null
+        }
+        return permissions.map(permission => permission.name)
+    } catch (error) {
+        console.error("Error al obtener los permisos del rol", error)
+        throw new Error("Error del servidor")
     }
 }

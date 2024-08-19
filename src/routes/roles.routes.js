@@ -1,5 +1,5 @@
 import { Router } from "express";
-import { getRoles, getRol, postRoles, putRoles, getPermission, getPermissionsRol, getAllPermissions, putPermissions} from "../controllers/roles.controller.js";
+import { getRoles, getRol, postRoles, putRoles, getPermission, getRolePermissions, getAllPermissions, putPermissions} from "../controllers/roles.controller.js";
 
 const router = Router();
 
@@ -12,7 +12,7 @@ router.put('/roles/:id', putRoles)
 //Rutas de los permisos
 router.get('/permissions/:id_per', getPermission)
 router.get('/permissions/', getAllPermissions)
-router.get('/permissionsrol/:id_rol', getPermissionsRol)
+router.get('/permissionsrol/:id_rol', getRolePermissions)
 router.put('/permissions', putPermissions)
 
 export default router;
