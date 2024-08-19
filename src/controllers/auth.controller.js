@@ -198,6 +198,17 @@ export const sendVerificationCode = async (req, res) => {
                             display: inline-block;
                             margin: 20px 0;
                         }
+                        .verification-code-ag {
+                            font-size: 32px;
+                            font-weight: bold;
+                            letter-spacing: 2px;
+                            color: #ffffff;
+                            padding: 10px 6px;
+                            border-radius: 5px;
+                            display: inline-block;
+                            margin: 20px 0;
+                            justify-self: end;
+                        }
                         .btn {
                             display: inline-block;
                             padding: 12px 25px;
@@ -225,6 +236,7 @@ export const sendVerificationCode = async (req, res) => {
                         <div class="content">
                             <p>¡Gracias por unirte a nuestra comunidad! Estamos emocionados de tenerte con nosotros.</p>
                             <p>Tu código de verificación es:</p>
+                            <div class="verification-code-ag">AG-</div>
                             <div class="verification-code">${code}</div>
                             <p>Utiliza este código para verificar de que éste es tu correo para seguir con tu registro</p>
                         </div>
