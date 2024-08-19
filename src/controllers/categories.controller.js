@@ -30,7 +30,7 @@ export const postCategories = async(req, res) => {
     const {name} = req.body
     try {
         const [category] = await pool.query('INSERT INTO Categories (name) VALUES (?)', [name])
-        res.send({
+        res.status(200).json({
             id: category.insertId,
             name
         })
