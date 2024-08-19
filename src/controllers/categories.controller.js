@@ -42,8 +42,7 @@ export const postCategories = async(req, res) => {
 }
 
 export const putCategories = async(req, res) => {
-    const {id} = req.params
-    const {name} = req.body
+    const {id, name} = req.body
     try {
         const [category] = await pool.query("UPDATE Categories SET name = IFNULL(?, name) WHERE id_category = ?", [name, id])
         if (category.affectedRows == 0) return res.status(404).json({

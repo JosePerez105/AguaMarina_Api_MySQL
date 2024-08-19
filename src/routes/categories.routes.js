@@ -7,6 +7,6 @@ const router = Router();
 router.get('/categories', getCategories)
 router.get('/categories/:id', getCategory)
 router.post('/categories', postCategories)
-router.put('/categories/:id', putCategories)
+router.put('/categories', putCategories)
 
 export default router
