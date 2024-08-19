@@ -28,7 +28,7 @@ export const getUserById = async(req, res) => {
     }
 }
 
-export const getUserByMail = async(req, res) => {
+export const findUserByMail = async(req, res) => {
     const {mail} = req.body
     try {
         const [users] = await pool.query("SELECT * FROM Users WHERE mail = ?", [mail])

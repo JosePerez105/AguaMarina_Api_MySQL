@@ -1,5 +1,5 @@
 import { Router } from "express";
-import { getUsers, postUsers, putUsers, patchUserStatus, getUserById, getUserByMail } from "../controllers/users.controller.js";
+import { getUsers, postUsers, putUsers, patchUserStatus, getUserById, findUserByMail } from "../controllers/users.controller.js";
 import { authLogin, authenticateToken, checkPermission, sendVerificationCode, validateVerificationCode } from "../controllers/auth.controller.js";
 
 const router = Router();
@@ -7,7 +7,7 @@ const router = Router();
 //Rutas de los usuarios
 router.get('/users', [authenticateToken, checkPermission("Gestionar Usuarios")], getUsers)
 router.get('/users/:id', [], getUserById)
-router.get('/usersmail/', [], getUserByMail)
+router.post('/usersmail/', [], findUserByMail)
 router.post('/users', [], postUsers)
 router.put('/users/:id', [authenticateToken], putUsers)
 router.patch('/users/:id', [authenticateToken, checkPermission("Gestionar Usuarios")], patchUserStatus)
