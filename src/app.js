@@ -17,9 +17,9 @@ import purchasesRoutes from './routes/purchases.routes.js'
 import codesRoutes from './routes/codes.routes.js'
 
 const app = express()
-
+const whitelist = ["http://127.0.0.1:5500", "http://localhost:3000"]
 const corsOptions = {
-    origin: "http://localhost:3000",
+    origin: whitelist,
     credentials: true,
     methods: 'GET,HEAD,PUT,PATCH,POST,DELETE',
     allowedHeaders: 'Content-Type, Authorization, Access-Control-Allow-Origin',
