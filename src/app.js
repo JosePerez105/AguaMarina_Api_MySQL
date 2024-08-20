@@ -17,15 +17,10 @@ import purchasesRoutes from './routes/purchases.routes.js'
 import codesRoutes from './routes/codes.routes.js'
 
 const app = express()
-//const whitelist = ["http://127.0.0.1:5500", "http://localhost:3000"]
-const corsOptions = {
-    origin: true,
-    credentials: true,
-    methods: 'GET,HEAD,PUT,PATCH,POST,DELETE',
-    allowedHeaders: 'Content-Type, Authorization',
-};
 
-app.use(cors(corsOptions))
+
+
+app.use(cors())
 
 
 app.use(express.urlencoded({extended : false}))

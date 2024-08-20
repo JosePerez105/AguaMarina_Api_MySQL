@@ -33,7 +33,8 @@ export const postProducts = async(req, res) => {
             const [products] = await pool.query("INSERT INTO Products (name, total_quantity, price, description, id_category, status) VALUES (?, ?, ?, ?, ?, ?)", [name, total_quantity, price, description, id_category, status])
             res.json({
                 id: products.insertId,
-                name, total_quantity,
+                name, 
+                total_quantity,
                 price,
                 description,
                 id_category,
