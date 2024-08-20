@@ -9,7 +9,7 @@ import { getRolePermissionsFunc } from './roles.controller.js'
 
 export const authLogin = async(req, res) => {
     const {mail, password} = req.body;
-
+    const passwordStr = password.toString()
     try {
         const [resQuery] = await pool.query('SELECT * FROM Users WHERE mail = ?', [mail])
         if (resQuery.length <= 0) {
@@ -18,7 +18,7 @@ export const authLogin = async(req, res) => {
             })
         }
         const user = resQuery[0]
-        const isMatch =  await bcrypt.compare(password, user.password)
+        const isMatch =  await bcrypt.compare(passwordStr, user.password)
 
         if (isMatch) {
             const accessToken = generateAccessToken(user)
