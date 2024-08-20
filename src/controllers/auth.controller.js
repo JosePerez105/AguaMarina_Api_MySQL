@@ -28,7 +28,8 @@ export const authLogin = async(req, res) => {
             })
             await res.header('authorization', accessToken).json({
                     message : "Inicio de Sesión Correcto",
-                    data : user
+                    data : user,
+                    isLogin : True
                 }
             )
         } else {
