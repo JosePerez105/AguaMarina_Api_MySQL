@@ -19,18 +19,28 @@ import codesRoutes from './routes/codes.routes.js'
 const app = express()
 const whitelist = ["http://127.0.0.1:5500", "http://localhost:3000"]
 const corsOptions = {
-    origin: "*",
+    origin: whitelist,
+    credentials: true,
     methods: 'GET,HEAD,PUT,PATCH,POST,DELETE',
     allowedHeaders: 'Content-Type, Authorization, Access-Control-Allow-Origin',
 };
 
-
 app.use(cors(corsOptions))
 app.options('*', cors(corsOptions));
+
 
 app.use(express.urlencoded({extended : false}))
 app.use(express.json())
 app.use(cookieParser());
+
+app.use((req, res, next) => {
+    if (req.header('x-forwarded-proto') !== 'https') {
+        res.redirect(`https://${req.header('host')}${req.url}`);
+    } else {
+        next();
+    }
+});
+
 app.use('/api/docs', swaggerUI.serve, swaggerUI.setup(specs))
 
 app.use('/api', usersRoutes)
