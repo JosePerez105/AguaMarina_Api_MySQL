@@ -48,8 +48,7 @@ export const postProducts = async(req, res) => {
 }
 
 export const putProduct = async(req, res) => {
-    const {id} = req.params
-    const {name, total_quantity, price, description, id_category, status} = req.body
+    const {id, name, total_quantity, price, description, id_category, status} = req.body
     try {
         const [product] = await pool.query("UPDATE Products SET name = IFNULL(?, name), total_quantity = IFNULL(?, total_quantity), price = IFNULL(?, price), description = IFNULL(?, description), id_category = IFNULL(?, id_category), status = IFNULL(?, status) WHERE id_product = ?", [name, total_quantity, price, description, id_category, status, id])
         if (product.affectedRows == 0) return res.status(404).json({

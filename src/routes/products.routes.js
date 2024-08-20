@@ -7,7 +7,7 @@ const router = Router();
 router.get('/products', getProducts);
 router.get('/products/:id', getProduct);
 router.post('/products', postProducts);
-router.put('/products/:id', putProduct);
+router.put('/products', putProduct);
 router.patch('/products/:id', patchProductStatus);
 
 //Rutas de las imagenes
