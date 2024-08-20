@@ -62,7 +62,7 @@ export const deleteCategories = async(req, res) => {
     const {id} = req.params
 
     try {
-        const [category] = await pool.query('DELETE * FROM Categories WHERE id_category = ?', [id])
+        const [category] = await pool.query('DELETE FROM Categories WHERE id_category = ?', [id])
         if (category.affectedRows <= 0) return res.status(404).json({
             message: "No se ha eliminado ninguna categoría"
         })
