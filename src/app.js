@@ -19,8 +19,7 @@ import codesRoutes from './routes/codes.routes.js'
 const app = express()
 const whitelist = ["http://127.0.0.1:5500", "http://localhost:3000"]
 const corsOptions = {
-    origin: whitelist,
-    credentials: true,
+    origin: "*",
     methods: 'GET,HEAD,PUT,PATCH,POST,DELETE',
     allowedHeaders: 'Content-Type, Authorization, Access-Control-Allow-Origin',
 };
