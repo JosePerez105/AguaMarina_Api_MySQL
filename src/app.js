@@ -16,6 +16,9 @@ import checklistsRoutes from './routes/checklists.routes.js'
 import purchasesRoutes from './routes/purchases.routes.js'
 import codesRoutes from './routes/codes.routes.js'
 
+app.use(express.urlencoded({extended : false}))
+app.use(express.json())
+app.use(cookieParser());
 const app = express()
 //const whitelist = ["http://127.0.0.1:5500", "http://localhost:3000"]
 const corsOptions = {
@@ -25,13 +28,14 @@ const corsOptions = {
     allowedHeaders: 'Content-Type, Authorization',
 };
 
-app.use(cors())
-app.options('*', cors(corsOptions));
+app.use(cors(corsOptions))
 
 
-app.use(express.urlencoded({extended : false}))
-app.use(express.json())
-app.use(cookieParser());
+
+app.use((req, res, next) => {
+    console.log('CORS Headers:', res.getHeaders());
+    next();
+});
 
 app.use((req, res, next) => {
     if (req.header('x-forwarded-proto') !== 'https') {
