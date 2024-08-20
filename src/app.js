@@ -19,7 +19,7 @@ import codesRoutes from './routes/codes.routes.js'
 const app = express()
 
 const corsOptions = {
-    origin: "localhost:3000",
+    origin: "http://localhost:3000",
     credentials: true,
     methods: 'GET,HEAD,PUT,PATCH,POST,DELETE',
     allowedHeaders: 'Content-Type, Authorization, Access-Control-Allow-Origin',
