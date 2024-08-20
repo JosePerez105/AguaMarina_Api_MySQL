@@ -56,3 +56,22 @@ export const putCategories = async(req, res) => {
         })
     }
 }
+
+
+export const deleteCategories = async(req, res) => {
+    const {id} = req.body
+
+    try {
+        const [category] = await pool.query('DELETE * FROM Categories WHERE id_category = ?', [id])
+        if (category.affectedRows <= 0) return res.status(404).json({
+            message: "No se ha eliminado ninguna categoría"
+        })
+        res.json({
+            message : `Categoría # ${id} eliminada`
+        })
+    } catch (error) {
+        return res.status(500).json({
+            message : "Algo ha ido mal al eliminar la categoria"
+        })
+    }
+}
