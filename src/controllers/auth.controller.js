@@ -22,14 +22,14 @@ export const authLogin = async(req, res) => {
         console.log(isMatch)
         if (isMatch) {
             const accessToken = generateAccessToken(user)
-            /* await res.cookie('jwt', accessToken, {
+            await res.cookie('jwt', accessToken, {
                 httpOnly: true,
                 maxAge: 24 * 60 * 60 * 1000
-            }) */
+            }) 
             await res.status(200).header('authorization', accessToken).json({
                     message : "Inicio de Sesión Correcto",
                     data : user,
-                    isLogin : True
+                    isLogin : true
                 }
             )
         } else {
