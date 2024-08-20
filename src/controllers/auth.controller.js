@@ -19,13 +19,13 @@ export const authLogin = async(req, res) => {
         }
         const user = resQuery[0]
         const isMatch =  await bcrypt.compare(passwordStr, user.password)
-
+        console.log(isMatch)
         if (isMatch) {
             const accessToken = generateAccessToken(user)
-            await res.cookie('jwt', accessToken, {
+            /* await res.cookie('jwt', accessToken, {
                 httpOnly: true,
                 maxAge: 24 * 60 * 60 * 1000
-            })
+            }) */
             await res.status(200).header('authorization', accessToken).json({
                     message : "Inicio de Sesión Correcto",
                     data : user,
@@ -38,11 +38,10 @@ export const authLogin = async(req, res) => {
             })
         }
 
-    }catch (error){
+    }catch {
         console.log("Hay un error")
         return res.status(500).json({
             message : "Ocurrió un error en el servidor",
-            error
         })
     }
 
