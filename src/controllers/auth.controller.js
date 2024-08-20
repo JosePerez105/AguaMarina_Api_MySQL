@@ -26,7 +26,7 @@ export const authLogin = async(req, res) => {
                 httpOnly: true,
                 maxAge: 24 * 60 * 60 * 1000
             })
-            await res.header('authorization', accessToken).json({
+            await res.status(200).header('authorization', accessToken).json({
                     message : "Inicio de Sesión Correcto",
                     data : user,
                     isLogin : True
@@ -38,10 +38,11 @@ export const authLogin = async(req, res) => {
             })
         }
 
-    }catch {
+    }catch (error){
         console.log("Hay un error")
         return res.status(500).json({
-            message : "Ocurrió un error en el servidor"
+            message : "Ocurrió un error en el servidor",
+            error
         })
     }
 
