@@ -8,6 +8,6 @@ router.get('/categories', getCategories)
 router.get('/categories/:id', getCategory)
 router.post('/categories', postCategories)
 router.put('/categories', putCategories)
-router.delete('/categories', deleteCategories)
+router.delete('/categories/:id', deleteCategories)
 
 export default router

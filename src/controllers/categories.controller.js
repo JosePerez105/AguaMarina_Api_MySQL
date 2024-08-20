@@ -59,7 +59,7 @@ export const putCategories = async(req, res) => {
 
 
 export const deleteCategories = async(req, res) => {
-    const {id} = req.body
+    const {id} = req.params
 
     try {
         const [category] = await pool.query('DELETE * FROM Categories WHERE id_category = ?', [id])
