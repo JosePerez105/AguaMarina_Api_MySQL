@@ -22,10 +22,10 @@ const corsOptions = {
     origin: true,
     credentials: true,
     methods: 'GET,HEAD,PUT,PATCH,POST,DELETE',
-    allowedHeaders: 'Content-Type, Authorization, Access-Control-Allow-Origin',
+    allowedHeaders: 'Content-Type, Authorization',
 };
 
-app.use(cors(corsOptions))
+app.use(cors())
 app.options('*', cors(corsOptions));
 
 
