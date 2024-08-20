@@ -1,4 +1,3 @@
-import { exists } from 'fs';
 import {pool} from '../db.js'
 import bcrypt from 'bcrypt'
 
@@ -58,7 +57,7 @@ export const postUsers = async(req, res) => {
     } else {
         try {
             const [user] = await pool.query('INSERT INTO Users (names, lastnames, dni, mail, password, phone_number, id_rol, status) VALUES (?, ?, ?, ?, ?, ?, ?, ?)', [names, lastnames, dni, mail, pass_bcrypt, phone_number, id_rol, status])
-            res.json({
+            res.status(200).json({
                 id: user.insertId,
                 names,
                 lastnames,
