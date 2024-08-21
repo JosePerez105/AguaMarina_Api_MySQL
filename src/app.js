@@ -18,21 +18,21 @@ import codesRoutes from './routes/codes.routes.js'
 
 const app = express()
 //const whitelist = ["http://127.0.0.1:5500", "http://localhost:3000"]
-const corsOptions = {
+/* const corsOptions = {
     origin: true,
     credentials: true,
     methods: 'GET,HEAD,PUT,PATCH,POST,DELETE',
     allowedHeaders: 'Content-Type, Authorization',
-};
+}; */
 
-app.use(cors(corsOptions))
+app.use(cors())
 
-app.options('/api', (req, res) => {
-    res.header("Access-Control-Allow-Origin", "http://localhost:3000");
-    res.header("Access-Control-Allow-Headers", "Authorization");
-    res.header("Access-Control-Allow-Methods", "GET, HEAD, PUT, PATCH, POST, DELETE")
-    res.sendStatus(204)
-})
+app.options('/', (req, res) => {
+    res.header("Access-Control-Allow-Origin", "*");
+    res.header("Access-Control-Allow-Headers", "Authorization, Content-Type");
+    res.header("Access-Control-Allow-Methods", "GET, HEAD, PUT, PATCH, POST, DELETE");
+    res.sendStatus(204);
+});
 
 app.use(express.urlencoded({extended : false}))
 app.use(express.json())
