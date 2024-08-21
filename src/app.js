@@ -27,6 +27,12 @@ const corsOptions = {
 
 app.use(cors(corsOptions))
 
+app.options('/api', (req, res) => {
+    res.header("Access-Control-Allow-Origin", "http://localhost:3000");
+    res.header("Access-Control-Allow-Headers", "Authorization");
+    res.header("Access-Control-Allow-Methods", "GET, HEAD, PUT, PATCH, POST, DELETE")
+    res.sendStatus(204)
+})
 
 app.use(express.urlencoded({extended : false}))
 app.use(express.json())
