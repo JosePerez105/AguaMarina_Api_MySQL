@@ -24,7 +24,7 @@ export const getProduct = async(req, res) => {
 };
 
 export const getProductsCategory = async(req, res) => {
-    const {id_category} = req.body
+    const {id_category} = req.params
 
     try {
         const [products] = await pool.query('SELECT * FROM Products WHERE id_category = ?', [id_category])

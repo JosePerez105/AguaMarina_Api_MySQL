@@ -7,7 +7,7 @@ const router = Router();
 router.get('/products', getProducts);
 router.get('/products/:id', getProduct);
 
-router.post('/productscategory', getProductsCategory)
+router.get('/productscategory/:id', getProductsCategory)
 router.post('/products', postProducts);
 router.put('/products', putProduct);
 router.patch('/products/:id', patchProductStatus);
