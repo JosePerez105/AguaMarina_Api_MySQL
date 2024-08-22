@@ -23,6 +23,19 @@ export const getProduct = async(req, res) => {
     }
 };
 
+export const getProductsCategory = async(req, res) => {
+    const {id_category} = req.body
+
+    try {
+        const [products] = await pool.query('SELECT * FROM Products WHERE id_category = ?', [id_category])
+        res.json(products)
+    } catch (error) {
+        return res.status(500).json({
+            message : "Algo ha ido mal al obtener los productos por categoria"
+        })
+    }
+}
+
 export const postProducts = async(req, res) => {
     const {name, total_quantity, price, description, id_category, status = true} = req.body
     const [exists] = await pool.query('SELECT * FROM Products WHERE name = ?', [name])
