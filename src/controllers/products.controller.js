@@ -24,10 +24,10 @@ export const getProduct = async(req, res) => {
 };
 
 export const getProductsCategory = async(req, res) => {
-    const {id_category} = req.params
+    const {id} = req.params
 
     try {
-        const [products] = await pool.query('SELECT * FROM Products WHERE id_category = ?', [id_category])
+        const [products] = await pool.query('SELECT * FROM Products WHERE id_category = ?', [id])
         res.json(products)
     } catch (error) {
         return res.status(500).json({
