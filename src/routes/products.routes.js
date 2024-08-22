@@ -6,7 +6,8 @@ const router = Router();
 //Rutas de los productos
 router.get('/products', getProducts);
 router.get('/products/:id', getProduct);
-router.get('/productscategory', getProductsCategory)
+
+router.post('/productscategory', getProductsCategory)
 router.post('/products', postProducts);
 router.put('/products', putProduct);
 router.patch('/products/:id', patchProductStatus);
