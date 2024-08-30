@@ -5,12 +5,12 @@ import { authLogin, authenticateToken, checkPermission, sendVerificationCode, va
 const router = Router();
 
 //Rutas de los usuarios
-router.get('/users', [authenticateToken, checkPermission("Gestionar Usuarios")], getUsers)
+router.get('/users', [/*authenticateToken, checkPermission("Gestionar Usuarios")*/], getUsers)
 router.get('/users/:id', [], getUserById)
 router.post('/usersmail/', [], findUserByMail)
 router.post('/users', [], postUsers)
-router.put('/users/:id', [authenticateToken], putUsers)
-router.patch('/users/:id', [authenticateToken, checkPermission("Gestionar Usuarios")], patchUserStatus)
+router.put('/users/:id', [/*authenticateToken*/], putUsers)
+router.patch('/users/:id', [/*authenticateToken, checkPermission("Gestionar Usuarios")*/], patchUserStatus)
 
 //Rutas de login
 router.post('/authlogin', [], authLogin)
