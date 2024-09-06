@@ -25,7 +25,7 @@ const app = express()
     allowedHeaders: 'Content-Type, Authorization',
 }; */
 
-app.use(cors())
+N
 
 app.options('/', (req, res) => {
     res.header("Access-Control-Allow-Origin", "*");

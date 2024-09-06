@@ -85,6 +85,18 @@ export const getPermission = async(req, res) => {
     }
 
 }
+export const deletePermission = async(req, res) => {
+    const {id_per} = req.params
+    try {
+        const [permission] = await pool.query('DELETE * FROM Permissions WHERE id_permission IN (?)', [id_per]);
+        res.json(permission)
+    } catch (error) {
+        return res.status(500).json({
+            message : "Algo ha ido mal al eliminar el Permiso"
+        })
+    }
+
+}
 
 export const getRolePermissions = async(req, res) => {
     const {id_rol} = req.params
@@ -140,6 +152,7 @@ export const putPermissions = async(req, res) => {
         })
     }
 }
+
 
 //Funciones
 
